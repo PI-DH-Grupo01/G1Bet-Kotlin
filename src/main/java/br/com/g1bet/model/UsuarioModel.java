@@ -80,5 +80,5 @@ public class UsuarioModel {
     public void setSaldoUsuario(Double saldoUsuario) {
         this.saldoUsuario = saldoUsuario;
     }
-    
+
 }
