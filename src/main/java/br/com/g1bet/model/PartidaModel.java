@@ -1,45 +1,44 @@
 package br.com.g1bet.model;
 
-import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 
 public class PartidaModel {
 
-    private int id_partida;
+    private int idPartida;
 
-    private int id_timeA;
+    private int idTimeA;
 
-    private int id_timeB;
+    private int idTimeB;
 
     private String resultado;
 
-    private localtime data_hora_partida;
+    private LocalDateTime dataHoraPartida;
 
     public PartidaModel() {
 
     }
 
-    public int getId_partida() {
-        return id_partida;
+    public int getIdPartida() {
+        return idPartida;
     }
-    public void setId_partida(int id_partida) {
-        this.id_partida = id_partida;
-    }
-
-    public int getId_timeA() {
-        return id_timeA;
+    public void setIdPartida(int idPartida) {
+        this.idPartida = idPartida;
     }
 
-    public void setId_timeA(int id_timeA) {
-        this.id_timeA = id_timeA;
+    public int getIdTimeA() {
+        return idTimeA;
     }
 
-    public int getId_timeB() {
-        return id_timeB;
+    public void setIdTimeA(int idTimeA) {
+        this.idTimeA = idTimeA;
     }
 
-    public void setId_timeB(int id_timeB) {
-        this.id_timeB = id_timeB;
+    public int getIdTimeB() {
+        return idTimeB;
+    }
+
+    public void setIdTimeB(int idTimeB) {
+        this.idTimeB = idTimeB;
     }
 
     public String getResultado() {
@@ -50,11 +49,12 @@ public class PartidaModel {
         this.resultado = resultado;
     }
 
-    public localtime getData_hora_partida() {
-        return data_hora_partida;
+    public LocalDateTime getDataHoraPartida() {
+        return dataHoraPartida;
     }
 
-    public void setData_hora_partida(localtime data_hora_partida) {
-        this.data_hora_partida = data_hora_partida;
+    public void setDataHoraPartida(LocalDateTime dataHoraPartida) {
+        this.dataHoraPartida = dataHoraPartida;
     }
+
 }
