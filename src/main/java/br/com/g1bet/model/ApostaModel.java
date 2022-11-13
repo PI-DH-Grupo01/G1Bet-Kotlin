@@ -1,11 +1,30 @@
 package br.com.g1bet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class ApostaModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAposta;
+
+    @OneToMany(mappedBy = "apostas", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("apostas")
     private Long idUsuario;
+
+    @OneToMany(mappedBy = "apostas", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("apostas")
     private Long idPartida;
+
+    @NotNull
+    @Size(min = 5, max = 20)
     private String tipoDeAposta;
+
+    @NotNull
     private float valorApostado;
 
     public ApostaModel() {
@@ -52,3 +71,4 @@ public class ApostaModel {
         this.valorApostado = valorApostado;
     }
 }
+
