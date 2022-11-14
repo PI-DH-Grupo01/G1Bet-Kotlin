@@ -1,44 +1,62 @@
 package br.com.g1bet.model;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table(name = "partidas")
 public class PartidaModel {
 
-    private int idPartida;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id_partida;
 
-    private int idTimeA;
+    @OneToMany(mappedBy = "partidas", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("partidas")
+    private int id_timeA;
 
-    private int idTimeB;
+    @OneToMany(mappedBy = "partidas", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("partidas")
+    private int id_timeB;
 
+    @NotNull
+    @Size(min = 5, max = 20)
+    private String nome_partida;
+
+    @NotNull
+    @Size(min = 5, max = 20)
     private String resultado;
 
-    private LocalDateTime dataHoraPartida;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date data_hora_partida;
 
-    public PartidaModel() {
 
+    public int getId_partida() {
+        return id_partida;
+    }
+    public void setId_partida(int id_partida) {
+        this.id_partida = id_partida;
     }
 
-    public int getIdPartida() {
-        return idPartida;
-    }
-    public void setIdPartida(int idPartida) {
-        this.idPartida = idPartida;
+    public int getId_timeA() {
+        return id_timeA;
     }
 
-    public int getIdTimeA() {
-        return idTimeA;
+    public void setId_timeA(int id_timeA) {
+        this.id_timeA = id_timeA;
     }
 
-    public void setIdTimeA(int idTimeA) {
-        this.idTimeA = idTimeA;
+    public int getId_timeB() {
+        return id_timeB;
     }
 
-    public int getIdTimeB() {
-        return idTimeB;
-    }
-
-    public void setIdTimeB(int idTimeB) {
-        this.idTimeB = idTimeB;
+    public void setId_timeB(int id_timeB) {
+        this.id_timeB = id_timeB;
     }
 
     public String getResultado() {
@@ -49,12 +67,15 @@ public class PartidaModel {
         this.resultado = resultado;
     }
 
-    public LocalDateTime getDataHoraPartida() {
-        return dataHoraPartida;
+    public Date getData_hora_partida() {
+        return data_hora_partida;
     }
 
-    public void setDataHoraPartida(LocalDateTime dataHoraPartida) {
-        this.dataHoraPartida = dataHoraPartida;
+    public void setData_hora_partida(Date data_hora_partida) {
+        this.data_hora_partida = data_hora_partida;
     }
 
+    public String getNome_partida() { return nome_partida; }
+
+    public void setNome_partida(String nome_partida) { this.nome_partida = nome_partida; }
 }
