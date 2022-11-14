@@ -1,42 +1,81 @@
 package br.com.g1bet.model;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "times")
-public class TimeModel {
+@Table(name = "partidas")
+public class PartidaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id_partida;
+
+    @OneToMany(mappedBy = "partidas", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("partidas")
+    private int id_timeA;
+
+    @OneToMany(mappedBy = "partidas", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("partidas")
+    private int id_timeB;
 
     @NotNull
-    @Size(min = 5, max = 100)
-    private String nome;
+    @Size(min = 5, max = 20)
+    private String nome_partida;
 
-    @OneToMany(mappedBy = "time", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("time")
-    private List<PartidaModel> partidaModel;
+    @NotNull
+    @Size(min = 5, max = 20)
+    private String resultado;
 
-    public Long getId() {
-        return id;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date data_hora_partida;
+
+
+    public int getId_partida() {
+        return id_partida;
+    }
+    public void setId_partida(int id_partida) {
+        this.id_partida = id_partida;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public int getId_timeA() {
+        return id_timeA;
     }
 
-    public String getNome() {
-        return nome;
+    public void setId_timeA(int id_timeA) {
+        this.id_timeA = id_timeA;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public int getId_timeB() {
+        return id_timeB;
     }
+
+    public void setId_timeB(int id_timeB) {
+        this.id_timeB = id_timeB;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+
+    public Date getData_hora_partida() {
+        return data_hora_partida;
+    }
+
+    public void setData_hora_partida(Date data_hora_partida) {
+        this.data_hora_partida = data_hora_partida;
+    }
+
+    public String getNome_partida() { return nome_partida; }
+
+    public void setNome_partida(String nome_partida) { this.nome_partida = nome_partida; }
 }
