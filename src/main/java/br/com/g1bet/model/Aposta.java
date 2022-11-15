@@ -14,7 +14,7 @@ public class Aposta {
     @ManyToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Partida partida;
 
     @NotNull

@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "partidas")
 public class Partida {
 
     @Id

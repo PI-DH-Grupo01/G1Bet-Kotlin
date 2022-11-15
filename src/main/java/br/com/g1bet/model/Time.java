@@ -15,34 +15,32 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "times")
 public class Time {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotNull
-	@Size(min = 5, max = 100)
-	private String nome;
-	
-	@ManyToMany(mappedBy = "time", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("time")
-	private List<Partida> partidaModel;
 
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @NotNull
+    @Size(min = 5, max = 100)
+    private String nome;
 
-	public String getNome() {
-		return nome;
-	}
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Partida> partidaModel;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }
