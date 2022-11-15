@@ -12,13 +12,16 @@ public class Aposta {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_partida")
     private Partida partida;
 
     @NotNull
     @Size(min = 5, max = 20)
+    @Column(name = "tipo_de_aposta")
     private String tipo;
 
     @NotNull
@@ -52,13 +55,13 @@ public class Aposta {
         this.partida = partida;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+//    public String getTipo() {
+//        return tipo;
+//    }
+//
+//    public void setTipo(String tipo) {
+//        this.tipo = tipo;
+//    }
 
     public float getValorApostado() {
         return valorApostado;

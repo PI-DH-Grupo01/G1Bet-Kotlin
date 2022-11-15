@@ -16,16 +16,12 @@ public class Partida {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "time_visitante", referencedColumnName = "id")
+    @JoinColumn(name = "id_time_visitante", referencedColumnName = "id")
     private Time timeVisitante;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "time_casa", referencedColumnName = "id")
+    @JoinColumn(name = "id_time_casa", referencedColumnName = "id")
     private Time timeCasa;
-
-    @NotNull
-    @Size(min = 5, max = 20)
-    private String nome;
 
     @NotNull
     @Size(min = 5, max = 20)
@@ -35,6 +31,7 @@ public class Partida {
 
     }
 
+    @Column(name = "data_hora_partida")
     private LocalDate dataHora;
 
     public Long getId() {
@@ -59,14 +56,6 @@ public class Partida {
 
     public void setTimeCasa(Time timeCasa) {
         this.timeCasa = timeCasa;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public LocalDate getDataHora() {
