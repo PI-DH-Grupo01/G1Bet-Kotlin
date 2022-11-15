@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "times")
-public class TimeModel {
+public class Time {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class TimeModel {
 	
 	@ManyToMany(mappedBy = "time", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("time")
-	private List<PartidaModel> partidaModel;
+	private List<Partida> partidaModel;
 
 	public Long getId() {
 		return id;
