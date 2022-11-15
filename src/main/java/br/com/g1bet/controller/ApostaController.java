@@ -49,7 +49,7 @@ public class ApostaController {
 
     @GetMapping("/historico/{idUsuario}")
     public ResponseEntity<List<Aposta>> exibirHistorico(@PathVariable Long idUsuario){
-        return  ResponseEntity.ok(repository.findByUsuarioId(idUsuario));
+        return  ResponseEntity.ok(service.exibirHistorico(idUsuario));
     }
 
 
