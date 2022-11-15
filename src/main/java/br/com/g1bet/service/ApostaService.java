@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ApostaService {
 
@@ -32,5 +34,9 @@ public class ApostaService {
 
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    public List<Aposta> exibirHistorico(Long idUsuario){
+        return repository.findByUsuarioId(idUsuario);
     }
 }

@@ -47,5 +47,10 @@ public class ApostaController {
         service.deleteById(id);
     }
 
+    @GetMapping("/historico/{idUsuario}")
+    public ResponseEntity<List<Aposta>> exibirHistorico(@PathVariable Long idUsuario){
+        return  ResponseEntity.ok(service.exibirHistorico(idUsuario));
+    }
+
 
 }
