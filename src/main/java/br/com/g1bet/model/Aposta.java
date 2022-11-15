@@ -55,13 +55,13 @@ public class Aposta {
         this.partida = partida;
     }
 
-//    public String getTipo() {
-//        return tipo;
-//    }
-//
-//    public void setTipo(String tipo) {
-//        this.tipo = tipo;
-//    }
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     public float getValorApostado() {
         return valorApostado;
