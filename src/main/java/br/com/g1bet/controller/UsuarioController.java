@@ -11,25 +11,27 @@ import br.com.g1bet.service.UsuarioService;
 @RequestMapping("/usuarios")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
-	
-	private final UsuarioService service;
 
-	public UsuarioController(UsuarioService service) {
-		super();
-		this.service = service;
-	}
-	
-	@PostMapping("/cadastrar")
-	public ResponseEntity<Usuario> Post(@RequestBody Usuario usuario) {
-		return ResponseEntity.ok(service.cadastrar(usuario));
-	}
+    private final UsuarioService service;
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
-		service.deletar(id);
-		return ResponseEntity.noContent().build();
-	}
-	
-	
+    public UsuarioController(UsuarioService service) {
+        this.service = service;
+    }
+
+    @PostMapping("/cadastrar")
+    public ResponseEntity<Usuario> Post(@RequestBody Usuario usuario) {
+        return ResponseEntity.ok(service.cadastrar(usuario));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario, @PathVariable Long id) {
+        return ResponseEntity.ok().body(service.atualizar(usuario, id));
+    }
 
 }

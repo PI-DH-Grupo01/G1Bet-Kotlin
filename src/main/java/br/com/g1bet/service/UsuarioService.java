@@ -1,26 +1,46 @@
 package br.com.g1bet.service;
 
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.g1bet.model.Usuario;
 import br.com.g1bet.repository.UsuarioRepository;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioService {
-	
-	private final UsuarioRepository repository;
 
-	public UsuarioService(UsuarioRepository repository) {
-		super();
-		this.repository = repository;
-	}
-	
-	public Usuario cadastrar(Usuario usuario) {
-		return repository.save(usuario);
-	}
+    private final UsuarioRepository repository;
 
-	public void deletar(Long id) {
-		repository.deleteById(id);
-	}
+    public UsuarioService(UsuarioRepository repository) {
+        super();
+        this.repository = repository;
+    }
+
+    public Usuario cadastrar(Usuario usuario) {
+        return repository.save(usuario);
+    }
+
+    public void deletar(Long id) {
+        repository.deleteById(id);
+    }
+
+    private Usuario findById(Long id) {
+        Optional<Usuario> atualizarUsuario = repository.findById(id);
+        return atualizarUsuario.orElseThrow(() -> new ObjectNotFoundException("Id: " + id, "Usuario não encontrado"));
+    }
+
+    public Usuario atualizar(Usuario usuario, Long id) {
+        Usuario atualizarUsuario = findById(id);
+        atualizarUsuario.setNome(usuario.getNome());
+        atualizarUsuario.setCpf(usuario.getCpf());
+        atualizarUsuario.setDataDeNascimento(usuario.getDataDeNascimento());
+        atualizarUsuario.setEmail(usuario.getEmail());
+        atualizarUsuario.setSenha(usuario.getSenha());
+        atualizarUsuario.setChavePix(usuario.getNome());
+        atualizarUsuario.setSaldoUsuario(usuario.getSaldoUsuario());
+        return repository.save(atualizarUsuario);
+    }
 
 }
