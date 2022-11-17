@@ -1,4 +1,4 @@
-package br.com.g1bet.seguranca;
+package br.com.g1bet.security;
 
 import br.com.g1bet.model.Usuario;
 import br.com.g1bet.repository.UsuarioRepository;
@@ -24,7 +24,7 @@ public class AutenticacaoService implements UserDetailsService {
 
         if (usuario.isPresent())
             return new UserDetailsImpl(usuario.get());
-        throw new UsernameNotFoundException("User not found username" + username);
+        throw new UsernameNotFoundException("Dados ínvalidos " + username);
     }
 
 }

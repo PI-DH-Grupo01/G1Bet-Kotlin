@@ -1,4 +1,4 @@
-package br.com.g1bet.seguranca;
+package br.com.g1bet.security;
 
 import java.util.Collection;
 
