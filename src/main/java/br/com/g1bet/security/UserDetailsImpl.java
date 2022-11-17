@@ -11,11 +11,11 @@ public class UserDetailsImpl implements UserDetails{
 
 	private static final long serialVersionUID = 1L;
 
-	private String userName;
+	private String username;
 	private String password;
-		
+
 	public UserDetailsImpl(Usuario user) {
-		this.userName = user.getNome();
+		this.username = user.getEmail();
 		this.password = user.getSenha();
 	}
 
@@ -23,7 +23,7 @@ public class UserDetailsImpl implements UserDetails{
 	}
 
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {		
+	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return null;
 	}
 
@@ -34,7 +34,7 @@ public class UserDetailsImpl implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return userName;
+		return this.username;
 	}
 
 	@Override
@@ -43,12 +43,12 @@ public class UserDetailsImpl implements UserDetails{
 	}
 
 	@Override
-	public boolean isAccountNonLocked() {		
+	public boolean isAccountNonLocked() {
 		return true;
 	}
 
 	@Override
-	public boolean isCredentialsNonExpired() {	
+	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 

@@ -1,6 +1,7 @@
 package br.com.g1bet.service;
 
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.g1bet.model.Usuario;
@@ -19,6 +20,9 @@ public class UsuarioService {
     }
 
     public Usuario cadastrar(Usuario usuario) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String senhaEncoder = encoder.encode(usuario.getSenha());
+        usuario.setSenha(senhaEncoder);
         return repository.save(usuario);
     }
 
@@ -38,7 +42,7 @@ public class UsuarioService {
         atualizarUsuario.setDataDeNascimento(usuario.getDataDeNascimento());
         atualizarUsuario.setEmail(usuario.getEmail());
         atualizarUsuario.setSenha(usuario.getSenha());
-        atualizarUsuario.setChavePix(usuario.getNome());
+        atualizarUsuario.setChavePix(usuario.getChavePix());
         atualizarUsuario.setSaldoUsuario(usuario.getSaldoUsuario());
         return repository.save(atualizarUsuario);
     }
