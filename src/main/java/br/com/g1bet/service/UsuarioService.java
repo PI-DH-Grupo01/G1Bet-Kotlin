@@ -1,11 +1,12 @@
 package br.com.g1bet.service;
 
-import org.hibernate.ObjectNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import br.com.g1bet.model.Usuario;
+import br.com.g1bet.model.dto.UsuarioDTO;
+import br.com.g1bet.model.dto.UsuarioResponse;
 import br.com.g1bet.repository.UsuarioRepository;
+import org.hibernate.ObjectNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -13,16 +14,29 @@ import java.util.Optional;
 public class UsuarioService {
 
     private final UsuarioRepository repository;
+    private final PasswordEncoder encoder;
 
-    public UsuarioService(UsuarioRepository repository) {
+    public UsuarioService(UsuarioRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
+        this.encoder = encoder;
     }
 
-    public Usuario cadastrar(Usuario usuario) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String senhaEncoder = encoder.encode(usuario.getSenha());
-        usuario.setSenha(senhaEncoder);
-        return repository.save(usuario);
+    public UsuarioResponse cadastrar(UsuarioDTO usuarioDTO) {
+        if (repository.existsByEmail(usuarioDTO.getEmail())) {
+            throw new IllegalArgumentException("Esse email já existe!");
+        }
+
+        Usuario usuario = new Usuario();
+        usuario.setNome(usuarioDTO.getNome());
+        usuario.setCpf(usuarioDTO.getCpf());
+        usuario.setDataDeNascimento(usuarioDTO.getDataDeNascimento());
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setSenha(encoder.encode(usuarioDTO.getSenha()));
+        usuario.setChavePix(usuarioDTO.getChavePix());
+        usuario.setSaldoUsuario(usuarioDTO.getSaldoUsuario());
+
+        usuario = repository.save(usuario);
+        return UsuarioResponse.toUsuarioResponse(usuario);
     }
 
     public void deletar(Long id) {

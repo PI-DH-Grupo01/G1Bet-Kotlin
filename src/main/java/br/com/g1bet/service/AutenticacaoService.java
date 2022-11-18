@@ -1,7 +1,8 @@
-package br.com.g1bet.security;
+package br.com.g1bet.service;
 
 import br.com.g1bet.model.Usuario;
 import br.com.g1bet.repository.UsuarioRepository;
+import br.com.g1bet.security.UserDetailsImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
