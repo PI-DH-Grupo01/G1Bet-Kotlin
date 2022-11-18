@@ -1,6 +1,7 @@
 package br.com.g1bet.service;
 
 import br.com.g1bet.model.Aposta;
+import br.com.g1bet.model.TipoApostaEnum;
 import br.com.g1bet.repository.ApostaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,8 @@ public class ApostaService {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    public Object findAllByTipoContainingIgnoreCase(String tipoDeAposta) {
-        return ResponseEntity.ok(repository.findAllByTipoContainingIgnoreCase(tipoDeAposta));
+    public ResponseEntity<List<Aposta>> findAllByTipo(TipoApostaEnum tipoDeAposta) {
+        return ResponseEntity.ok(repository.findAllByTipo(tipoDeAposta));
     }
 
     public Object save(Aposta apostaModel) {

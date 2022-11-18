@@ -1,6 +1,7 @@
 package br.com.g1bet.controller;
 
 import br.com.g1bet.model.Aposta;
+import br.com.g1bet.model.TipoApostaEnum;
 import br.com.g1bet.service.ApostaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,8 @@ public class ApostaController {
     }
 
     @GetMapping("/aposta/{tipoDeAposta}")
-    public ResponseEntity<List<Aposta>> getByAposta(@PathVariable String tipoDeAposta) {
-        return (ResponseEntity<List<Aposta>>) service.findAllByTipoContainingIgnoreCase(tipoDeAposta);
+    public ResponseEntity<List<Aposta>> getByAposta(@PathVariable TipoApostaEnum tipoDeAposta) {
+        return service.findAllByTipo(tipoDeAposta);
 
     }
 

@@ -27,12 +27,12 @@ public class Partida {
     @Size(min = 5, max = 20)
     private String resultado;
 
+    @Column(name = "data_hora_partida")
+    private LocalDate dataHora;
+
     public Partida() {
 
     }
-
-    @Column(name = "data_hora_partida")
-    private LocalDate dataHora;
 
     public Long getId() {
         return id;

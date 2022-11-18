@@ -2,7 +2,6 @@ package br.com.g1bet.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 public class Aposta {
@@ -20,12 +19,15 @@ public class Aposta {
     private Partida partida;
 
     @NotNull
-    @Size(min = 5, max = 20)
     @Column(name = "tipo_de_aposta")
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    private TipoApostaEnum tipo;
 
     @NotNull
-    private float valorApostado;
+    private Double valorApostado;
+
+    @NotNull
+    private Double odd = (Math.random() * 5);
 
     public Aposta() {
 
@@ -55,20 +57,28 @@ public class Aposta {
         this.partida = partida;
     }
 
-    public String getTipo() {
+    public TipoApostaEnum getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoApostaEnum tipo) {
         this.tipo = tipo;
     }
 
-    public float getValorApostado() {
+    public Double getValorApostado() {
         return valorApostado;
     }
 
-    public void setValorApostado(float valorApostado) {
+    public void setValorApostado(Double valorApostado) {
         this.valorApostado = valorApostado;
+    }
+
+    public Double getOdd() {
+        return odd;
+    }
+
+    public void setOdd(Double odd) {
+        this.odd = odd;
     }
 
 }
