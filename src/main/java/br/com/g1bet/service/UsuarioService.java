@@ -15,7 +15,6 @@ public class UsuarioService {
     private final UsuarioRepository repository;
 
     public UsuarioService(UsuarioRepository repository) {
-        super();
         this.repository = repository;
     }
 
@@ -30,9 +29,9 @@ public class UsuarioService {
         repository.deleteById(id);
     }
 
-    private Usuario findById(Long id) {
-        Optional<Usuario> atualizarUsuario = repository.findById(id);
-        return atualizarUsuario.orElseThrow(() -> new ObjectNotFoundException("Id: " + id, "Usuario não encontrado"));
+    public Usuario findById(Long id) {
+        Optional<Usuario> usuario = repository.findById(id);
+        return usuario.orElseThrow(() -> new ObjectNotFoundException("Id: " + id, "Usuario não encontrado"));
     }
 
     public Usuario atualizar(Usuario usuario, Long id) {
