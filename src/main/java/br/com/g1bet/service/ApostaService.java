@@ -7,7 +7,6 @@ import br.com.g1bet.model.Usuario;
 import br.com.g1bet.model.dto.ApostaDTO;
 import br.com.g1bet.model.dto.ApostaResponse;
 import br.com.g1bet.repository.ApostaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +15,15 @@ import java.util.List;
 @Service
 public class ApostaService {
 
-    @Autowired
-    private ApostaRepository repository;
+    private final ApostaRepository repository;
+    private final UsuarioService usuarioService;
+    private final PartidaService partidaService;
 
-    @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
-    private PartidaService partidaService;
+    public ApostaService(ApostaRepository repository, UsuarioService usuarioService, PartidaService partidaService) {
+        this.repository = repository;
+        this.usuarioService = usuarioService;
+        this.partidaService = partidaService;
+    }
 
     public Object findAll() {
         return ResponseEntity.ok(repository.findAll());

@@ -34,7 +34,7 @@ public class BasicSecurityConfig {
                 .cors().and()
                 .authorizeHttpRequests((auth) -> auth
                         .antMatchers("/usuarios/logar").permitAll()
-                        .antMatchers("/usuarios/cadastrar").permitAll()
+                        .antMatchers("/usuarios").permitAll()
                         .anyRequest().authenticated()).httpBasic();
         return http.build();
     }

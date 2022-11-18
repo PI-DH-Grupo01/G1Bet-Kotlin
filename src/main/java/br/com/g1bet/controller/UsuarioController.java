@@ -1,11 +1,11 @@
 package br.com.g1bet.controller;
 
-import org.springframework.http.HttpStatus;
+import br.com.g1bet.model.Usuario;
+import br.com.g1bet.model.dto.UsuarioDTO;
+import br.com.g1bet.model.dto.UsuarioResponse;
+import br.com.g1bet.service.UsuarioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import br.com.g1bet.model.Usuario;
-import br.com.g1bet.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -18,13 +18,13 @@ public class UsuarioController {
         this.service = service;
     }
 
-    @PostMapping("/cadastrar")
-    public ResponseEntity<Usuario> Post(@RequestBody Usuario usuario) {
-        return ResponseEntity.ok(service.cadastrar(usuario));
+    @PostMapping
+    public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody UsuarioDTO usuarioDTO) {
+        return ResponseEntity.ok(service.cadastrar(usuarioDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
