@@ -19,4 +19,11 @@ public class PartidaService {
         visitantes.addAll(casa);
         return visitantes;
     }
+
+    public Partida findById(Long id) {
+        Partida partida = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Partida não encontrada"));
+        return partida;
+    }
+
 }

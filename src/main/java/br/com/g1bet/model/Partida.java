@@ -1,12 +1,9 @@
 package br.com.g1bet.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Partida {
@@ -28,7 +25,7 @@ public class Partida {
     private String resultado;
 
     @Column(name = "data_hora_partida")
-    private LocalDate dataHora;
+    private LocalDateTime dataHora;
 
     public Partida() {
 
@@ -58,11 +55,11 @@ public class Partida {
         this.timeCasa = timeCasa;
     }
 
-    public LocalDate getDataHora() {
+    public LocalDateTime getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(LocalDate dataHora) {
+    public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
     }
 
