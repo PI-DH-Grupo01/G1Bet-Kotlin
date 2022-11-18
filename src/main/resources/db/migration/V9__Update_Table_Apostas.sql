@@ -1,0 +1,1 @@
+ALTER TABLE aposta MODIFY tipo_de_aposta VARCHAR(30);
