@@ -1,5 +1,6 @@
 package br.com.g1bet.service;
 
+import br.com.g1bet.exceptions.CampoExistenteException;
 import br.com.g1bet.exceptions.IdNaoExisteException;
 import br.com.g1bet.model.Time;
 import br.com.g1bet.repository.TimeRepository;
@@ -30,6 +31,9 @@ public class TimeService {
     }
 
     public Time cadastrar(Time time) {
+        if (timeRepository.existsByNome(time.getNome())) {
+            throw new CampoExistenteException("Esse time já está cadastrado");
+        }
         return timeRepository.save(time);
     }
 
