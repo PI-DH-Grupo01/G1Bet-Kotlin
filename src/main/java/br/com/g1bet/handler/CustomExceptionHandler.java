@@ -2,6 +2,7 @@ package br.com.g1bet.handler;
 
 import br.com.g1bet.exceptions.EmailExistenteException;
 import br.com.g1bet.exceptions.CampoNullException;
+import br.com.g1bet.exceptions.IdNaoExisteException;
 import br.com.g1bet.exceptions.SaldoInsuficienteException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,6 +24,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<String> handlerSaldoInsuficienteException(SaldoInsuficienteException saldoInsuficienteException) {
         return ResponseEntity.badRequest().body(saldoInsuficienteException.getMessage());
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handlerIdNaoExisteException(IdNaoExisteException idNaoExisteException) {
+        return ResponseEntity.badRequest().body(idNaoExisteException.getMessage());
     }
 
 }
