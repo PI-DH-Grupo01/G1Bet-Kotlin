@@ -3,6 +3,7 @@ package br.com.g1bet.model.dto;
 import br.com.g1bet.model.Aposta;
 import br.com.g1bet.model.TipoApostaEnum;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 public class ApostaResponse {
@@ -12,6 +13,9 @@ public class ApostaResponse {
     private TipoApostaEnum tipoApostaEnum;
     private Double valor;
     private Double odd;
+    private String possivelRetorno;
+    private static final DecimalFormat df = new DecimalFormat("R$ 0.00");
+    private static final DecimalFormat df2 = new DecimalFormat("0.00");
 
     public static ApostaResponse toApostaResponse(Aposta aposta) {
         PartidaResponse partidaResponse = new PartidaResponse();
@@ -25,17 +29,20 @@ public class ApostaResponse {
                 partidaResponse,
                 aposta.getTipo(),
                 aposta.getValorApostado(),
-                aposta.getOdd()
+                aposta.getOdd(),
+                df.format(aposta.getOdd() * aposta.getValorApostado())
         );
     }
 
-    public ApostaResponse(Long id, String usuario, PartidaResponse partida, TipoApostaEnum tipoApostaEnum, Double valor, Double odd) {
+    public ApostaResponse(Long id, String usuario, PartidaResponse partida,
+                          TipoApostaEnum tipoApostaEnum, Double valor, Double odd, String possivelRetorno) {
         this.id = id;
         this.usuario = usuario;
         this.partida = partida;
         this.tipoApostaEnum = tipoApostaEnum;
         this.valor = valor;
         this.odd = odd;
+        this.possivelRetorno = possivelRetorno;
     }
 
     public ApostaResponse() {
@@ -82,12 +89,20 @@ public class ApostaResponse {
         this.valor = valor;
     }
 
-    public Double getOdd() {
-        return odd;
+    public String getOdd() {
+        return df2.format(odd);
     }
 
     public void setOdd(Double odd) {
         this.odd = odd;
+    }
+
+    public String getPossivelRetorno() {
+        return possivelRetorno;
+    }
+
+    public void setPossivelRetorno(String possivelRetorno) {
+        this.possivelRetorno = possivelRetorno;
     }
 }
 
