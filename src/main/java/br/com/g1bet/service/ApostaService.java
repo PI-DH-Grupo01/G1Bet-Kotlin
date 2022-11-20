@@ -26,21 +26,17 @@ public class ApostaService {
         this.partidaService = partidaService;
     }
 
-    public Object findAll() {
-        return ResponseEntity.ok(repository.findAll());
-    }
-
-    public ResponseEntity<ApostaResponse> findById(Long id) {
+    public ResponseEntity<ApostaResponse> buscarId(Long id) {
         return repository.findById(id)
                 .map(resp -> ResponseEntity.ok(ApostaResponse.toApostaResponse(resp)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    public ResponseEntity<List<Aposta>> findAllByTipo(TipoApostaEnum tipoDeAposta) {
-        return ResponseEntity.ok(repository.findAllByTipo(tipoDeAposta));
+    public List<Aposta> buscarTipo(TipoApostaEnum tipoDeAposta) {
+        return repository.findAllByTipo(tipoDeAposta);
     }
 
-    public ApostaResponse save(ApostaDTO apostaDTO) {
+    public ApostaResponse apostar(ApostaDTO apostaDTO) {
         Usuario usuario = usuarioService.findById(apostaDTO.getUsuario());
 
         if (usuario.getSaldoUsuario() < apostaDTO.getValorApostado()) {
@@ -63,8 +59,8 @@ public class ApostaService {
         repository.deleteById(id);
     }
 
-    public List<Aposta> exibirHistorico(Long idUsuario) {
-        return repository.findByUsuarioId(idUsuario);
+    public List<ApostaResponse> exibirHistorico(Long id) {
+        return repository.findByUsuarioId(id).stream().map(aposta -> ApostaResponse.toApostaResponse(aposta)).toList();
     }
 
 }

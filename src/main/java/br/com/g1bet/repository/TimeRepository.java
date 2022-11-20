@@ -11,4 +11,6 @@ import br.com.g1bet.model.Time;
 public interface TimeRepository extends JpaRepository<Time, Long> {
     List<Time> findAllByNomeContainingIgnoreCase(String nome);
 
+    Boolean existsByNome(String nome);
+
 }

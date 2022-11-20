@@ -1,6 +1,6 @@
 package br.com.g1bet.service;
 
-import br.com.g1bet.exceptions.EmailExistenteException;
+import br.com.g1bet.exceptions.CampoExistenteException;
 import br.com.g1bet.exceptions.CampoNullException;
 import br.com.g1bet.model.Usuario;
 import br.com.g1bet.model.dto.UsuarioDTO;
@@ -25,7 +25,7 @@ public class UsuarioService {
 
     public UsuarioResponse cadastrar(UsuarioDTO usuarioDTO) {
         if (repository.existsByEmail(usuarioDTO.getEmail())) {
-            throw new EmailExistenteException("Esse email já existe!");
+            throw new CampoExistenteException("Esse email já existe!");
         }
         if (usuarioDTO.getSenha() == null
                 || usuarioDTO.getEmail() == null

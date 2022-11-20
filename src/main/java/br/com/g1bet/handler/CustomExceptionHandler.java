@@ -1,6 +1,6 @@
 package br.com.g1bet.handler;
 
-import br.com.g1bet.exceptions.EmailExistenteException;
+import br.com.g1bet.exceptions.CampoExistenteException;
 import br.com.g1bet.exceptions.CampoNullException;
 import br.com.g1bet.exceptions.IdNaoExisteException;
 import br.com.g1bet.exceptions.SaldoInsuficienteException;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class CustomExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<String> handlerEmailExisteException(EmailExistenteException emailExistenteException) {
+    public ResponseEntity<String> handlerEmailExisteException(CampoExistenteException emailExistenteException) {
         return ResponseEntity.badRequest().body(emailExistenteException.getMessage());
     }
 
