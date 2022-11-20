@@ -1,5 +1,6 @@
 package br.com.g1bet.service;
 
+import br.com.g1bet.exceptions.SaldoInsuficienteException;
 import br.com.g1bet.model.Aposta;
 import br.com.g1bet.model.Partida;
 import br.com.g1bet.model.TipoApostaEnum;
@@ -43,7 +44,7 @@ public class ApostaService {
         Usuario usuario = usuarioService.findById(apostaDTO.getUsuario());
 
         if (usuario.getSaldoUsuario() < apostaDTO.getValorApostado()) {
-            throw new IllegalArgumentException("Valor inválido");
+            throw new SaldoInsuficienteException("Saldo insuficiente");
         }
 
         Partida partida = partidaService.findById(apostaDTO.getPartida());
