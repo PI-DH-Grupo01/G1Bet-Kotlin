@@ -1,5 +1,7 @@
 package br.com.g1bet.service;
 
+import br.com.g1bet.exceptions.CampoExistenteException;
+import br.com.g1bet.exceptions.CampoNullException;
 import br.com.g1bet.model.Usuario;
 import br.com.g1bet.model.dto.UsuarioDTO;
 import br.com.g1bet.model.dto.UsuarioResponse;
@@ -23,7 +25,13 @@ public class UsuarioService {
 
     public UsuarioResponse cadastrar(UsuarioDTO usuarioDTO) {
         if (repository.existsByEmail(usuarioDTO.getEmail())) {
-            throw new IllegalArgumentException("Esse email já existe!");
+            throw new CampoExistenteException("Esse email já existe!");
+        }
+        if (usuarioDTO.getSenha() == null
+                || usuarioDTO.getEmail() == null
+                || usuarioDTO.getDataDeNascimento() == null
+                || usuarioDTO.getNome() == null) {
+            throw new CampoNullException("Campo obrigatório não pode ser nulo");
         }
 
         Usuario usuario = new Usuario();

@@ -27,7 +27,7 @@ public class Aposta {
     private Double valorApostado;
 
     @NotNull
-    private Double odd = (Math.random() * 5);
+    private Double odd = Math.random() * 5;
 
     public Aposta() {
 
@@ -74,7 +74,11 @@ public class Aposta {
     }
 
     public Double getOdd() {
-        return odd;
+        return arredondarParaDuasCasas(odd);
+    }
+
+    public static Double arredondarParaDuasCasas(double d) {
+        return ((long) (d < 0 ? d * 100 - 0.5 : d * 100 + 0.5)) / 100.0;
     }
 
     public void setOdd(Double odd) {

@@ -1,5 +1,7 @@
 package br.com.g1bet.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,11 +14,11 @@ public class Partida {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_time_visitante", referencedColumnName = "id")
     private Time timeVisitante;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_time_casa", referencedColumnName = "id")
     private Time timeCasa;
 
@@ -25,6 +27,7 @@ public class Partida {
     private String resultado;
 
     @Column(name = "data_hora_partida")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime dataHora;
 
     public Partida() {
@@ -70,5 +73,7 @@ public class Partida {
     public void setResultado(String resultado) {
         this.resultado = resultado;
     }
+
+
 
 }
