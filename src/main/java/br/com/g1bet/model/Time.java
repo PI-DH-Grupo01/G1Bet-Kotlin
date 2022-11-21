@@ -1,11 +1,11 @@
 package br.com.g1bet.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Time {
@@ -17,6 +17,14 @@ public class Time {
     @NotNull
     @Size(min = 5, max = 100)
     private String nome;
+
+    @OneToMany(mappedBy = "timeCasa", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Partida> partidasCasa;
+
+    @OneToMany(mappedBy = "timeVisitante", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Partida> partidasVisitante;
 
     public Long getId() {
         return id;
