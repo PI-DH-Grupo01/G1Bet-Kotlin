@@ -5,7 +5,6 @@ import br.com.g1bet.model.TipoApostaEnum;
 import br.com.g1bet.model.dto.ApostaDTO;
 import br.com.g1bet.model.dto.ApostaResponse;
 import br.com.g1bet.service.ApostaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,28 +16,30 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ApostaController {
 
-    @Autowired
-    private ApostaService service;
+    private final ApostaService service;
 
-    @GetMapping
-    public ResponseEntity<List<Aposta>> getAll() {
-        return (ResponseEntity<List<Aposta>>) service.findAll();
+    public ApostaController(ApostaService apostaService) {
+        this.service = apostaService;
     }
 
+//    @GetMapping
+//    public ResponseEntity<List<Aposta>> getAll() {
+//        return (ResponseEntity<List<Aposta>>) service.findAll();
+//    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ApostaResponse> getById(@PathVariable Long id) {
-        return service.findById(id);
+    public ResponseEntity<ApostaResponse> buscarId(@PathVariable Long id) {
+        return service.buscarId(id);
     }
 
     @GetMapping("/tipo/{tipoDeAposta}")
-    public ResponseEntity<List<Aposta>> getByAposta(@PathVariable TipoApostaEnum tipoDeAposta) {
-        return (ResponseEntity<List<Aposta>>) service.findAllByTipo(tipoDeAposta);
-
+    public ResponseEntity<List<Aposta>> buscarTipo(@PathVariable TipoApostaEnum tipoDeAposta) {
+        return ResponseEntity.ok(service.buscarTipo(tipoDeAposta));
     }
 
     @PostMapping
-    public ResponseEntity<Object> post(@RequestBody ApostaDTO apostaModel) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(apostaModel));
+    public ResponseEntity<Object> apostar(@RequestBody ApostaDTO apostaModel) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.apostar(apostaModel));
     }
 
     @DeleteMapping("/{id}")
@@ -46,9 +47,9 @@ public class ApostaController {
         service.deleteById(id);
     }
 
-    @GetMapping("/historico/{idUsuario}")
-    public ResponseEntity<List<Aposta>> exibirHistorico(@PathVariable Long idUsuario){
-        return  ResponseEntity.ok(service.exibirHistorico(idUsuario));
+    @GetMapping("/historico/{id}")
+    public ResponseEntity<List<ApostaResponse>> exibirHistorico(@PathVariable Long id) {
+        return ResponseEntity.ok(service.exibirHistorico(id));
     }
 
 

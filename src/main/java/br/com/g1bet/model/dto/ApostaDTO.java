@@ -8,6 +8,7 @@ public class ApostaDTO {
     private Long partida;
     private TipoApostaEnum tipo;
     private Double ValorApostado;
+    private Double possivelRetorno;
 
     public Long getUsuario() {
         return usuario;
@@ -40,4 +41,13 @@ public class ApostaDTO {
     public void setValorApostado(Double valorApostado) {
         ValorApostado = valorApostado;
     }
+
+    public Double getPossivelRetorno() {
+        return possivelRetorno;
+    }
+
+    public void setPossivelRetorno(Double possivelRetorno) {
+        this.possivelRetorno = possivelRetorno;
+    }
+
 }
