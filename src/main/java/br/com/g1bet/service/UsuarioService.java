@@ -3,45 +3,42 @@ package br.com.g1bet.service;
 import br.com.g1bet.exceptions.CampoExistenteException;
 import br.com.g1bet.exceptions.CampoNullException;
 import br.com.g1bet.model.Usuario;
-import br.com.g1bet.model.dto.UsuarioDTO;
+import br.com.g1bet.model.dto.UsuarioRequest;
 import br.com.g1bet.model.dto.UsuarioResponse;
 import br.com.g1bet.repository.UsuarioRepository;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class UsuarioService {
 
     private final UsuarioRepository repository;
     private final PasswordEncoder encoder;
 
-    public UsuarioService(UsuarioRepository repository, PasswordEncoder encoder) {
-        this.repository = repository;
-        this.encoder = encoder;
-    }
-
-    public UsuarioResponse cadastrar(UsuarioDTO usuarioDTO) {
-        if (repository.existsByEmail(usuarioDTO.getEmail())) {
+    public UsuarioResponse cadastrar(UsuarioRequest usuarioRequest) {
+        if (repository.existsByEmail(usuarioRequest.getEmail())) {
             throw new CampoExistenteException("Esse email já existe!");
         }
-        if (usuarioDTO.getSenha() == null
-                || usuarioDTO.getEmail() == null
-                || usuarioDTO.getDataDeNascimento() == null
-                || usuarioDTO.getNome() == null) {
+        if (usuarioRequest.getSenha() == null
+                || usuarioRequest.getEmail() == null
+                || usuarioRequest.getDataDeNascimento() == null
+                || usuarioRequest.getNome() == null) {
             throw new CampoNullException("Campo obrigatório não pode ser nulo");
         }
 
         Usuario usuario = new Usuario();
-        usuario.setNome(usuarioDTO.getNome());
-        usuario.setCpf(usuarioDTO.getCpf());
-        usuario.setDataDeNascimento(usuarioDTO.getDataDeNascimento());
-        usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setSenha(encoder.encode(usuarioDTO.getSenha()));
-        usuario.setChavePix(usuarioDTO.getChavePix());
-        usuario.setSaldoUsuario(usuarioDTO.getSaldoUsuario());
+        usuario.setNome(usuarioRequest.getNome());
+        usuario.setCpf(usuarioRequest.getCpf());
+        usuario.setDataDeNascimento(usuarioRequest.getDataDeNascimento());
+        usuario.setEmail(usuarioRequest.getEmail());
+        usuario.setSenha(encoder.encode(usuarioRequest.getSenha()));
+        usuario.setChavePix(usuarioRequest.getChavePix());
+        usuario.setSaldoUsuario(usuarioRequest.getSaldoUsuario());
 
         usuario = repository.save(usuario);
         return UsuarioResponse.toUsuarioResponse(usuario);

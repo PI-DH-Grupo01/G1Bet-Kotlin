@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 
-public class UsuarioDTO {
+public class UsuarioRequest {
 
     private String nome;
     private Long cpf;
