@@ -1,10 +1,9 @@
-package br.com.g1bet.model.dto;
+package br.com.g1bet.dto.response;
 
 import br.com.g1bet.model.Aposta;
 import br.com.g1bet.model.TipoApostaEnum;
 
 import java.text.DecimalFormat;
-import java.time.LocalDateTime;
 
 public class ApostaResponse {
     private Long id;

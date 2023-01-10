@@ -1,4 +1,4 @@
-package br.com.g1bet.model.dto.response;
+package br.com.g1bet.dto.response;
 
 import br.com.g1bet.model.Usuario;
 import com.fasterxml.jackson.annotation.JsonFormat;

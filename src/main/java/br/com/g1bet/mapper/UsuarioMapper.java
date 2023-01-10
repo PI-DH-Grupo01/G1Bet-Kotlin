@@ -1,7 +1,7 @@
 package br.com.g1bet.mapper;
 
 import br.com.g1bet.model.Usuario;
-import br.com.g1bet.model.dto.UsuarioRequest;
+import br.com.g1bet.dto.request.UsuarioRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

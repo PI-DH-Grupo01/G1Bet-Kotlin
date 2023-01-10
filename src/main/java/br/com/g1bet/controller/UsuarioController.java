@@ -1,8 +1,8 @@
 package br.com.g1bet.controller;
 
 import br.com.g1bet.model.Usuario;
-import br.com.g1bet.model.dto.UsuarioRequest;
-import br.com.g1bet.model.dto.UsuarioResponse;
+import br.com.g1bet.dto.request.UsuarioRequest;
+import br.com.g1bet.dto.response.UsuarioResponse;
 import br.com.g1bet.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
