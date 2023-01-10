@@ -1,4 +1,4 @@
-package br.com.g1bet.model.dto;
+package br.com.g1bet.model.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

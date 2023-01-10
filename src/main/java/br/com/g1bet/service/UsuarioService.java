@@ -2,6 +2,7 @@ package br.com.g1bet.service;
 
 import br.com.g1bet.exceptions.CampoExistenteException;
 import br.com.g1bet.exceptions.CampoNullException;
+import br.com.g1bet.mapper.UsuarioMapper;
 import br.com.g1bet.model.Usuario;
 import br.com.g1bet.model.dto.UsuarioRequest;
 import br.com.g1bet.model.dto.UsuarioResponse;
@@ -31,17 +32,8 @@ public class UsuarioService {
             throw new CampoNullException("Campo obrigatório não pode ser nulo");
         }
 
-        Usuario usuario = new Usuario();
-        usuario.setNome(usuarioRequest.getNome());
-        usuario.setCpf(usuarioRequest.getCpf());
-        usuario.setDataDeNascimento(usuarioRequest.getDataDeNascimento());
-        usuario.setEmail(usuarioRequest.getEmail());
-        usuario.setSenha(encoder.encode(usuarioRequest.getSenha()));
-        usuario.setChavePix(usuarioRequest.getChavePix());
-        usuario.setSaldoUsuario(usuarioRequest.getSaldoUsuario());
-
-        usuario = repository.save(usuario);
-        return UsuarioResponse.toUsuarioResponse(usuario);
+        Usuario usuario = UsuarioMapper.INSTANCE.toUsuario(usuarioRequest);
+        return UsuarioResponse.toUsuarioResponse(repository.save(usuario));
     }
 
     public void deletar(Long id) {
