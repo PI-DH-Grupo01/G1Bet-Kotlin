@@ -1,6 +1,6 @@
 package br.com.g1bet.service;
 
-import br.com.g1bet.exceptions.SaldoInsuficienteException;
+import br.com.g1bet.mapper.exceptions.SaldoInsuficienteException;
 import br.com.g1bet.model.Aposta;
 import br.com.g1bet.model.Partida;
 import br.com.g1bet.model.TipoApostaEnum;

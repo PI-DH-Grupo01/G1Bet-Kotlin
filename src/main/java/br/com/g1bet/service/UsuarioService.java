@@ -1,7 +1,7 @@
 package br.com.g1bet.service;
 
-import br.com.g1bet.exceptions.CampoExistenteException;
-import br.com.g1bet.exceptions.IdNaoExisteException;
+import br.com.g1bet.mapper.exceptions.CampoExistenteException;
+import br.com.g1bet.mapper.exceptions.IdNaoExisteException;
 import br.com.g1bet.mapper.UsuarioMapper;
 import br.com.g1bet.model.Usuario;
 import br.com.g1bet.dto.request.UsuarioRequest;
